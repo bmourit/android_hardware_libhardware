@@ -116,6 +116,10 @@ enum {
      * composition to the external sink.
      */
     GRALLOC_USAGE_PROTECTED             = 0x00004000,
+#ifdef ACT_GRLC
+    GRALLOC_USAGE_HW_VIDEO       	= 0x00100000,
+    GRALLOC_USAGE_HW_CAMERA		= 0x00200000,
+#endif
 
     /* implementation-specific private usage flags */
     GRALLOC_USAGE_PRIVATE_0             = 0x10000000,
@@ -138,7 +142,7 @@ enum {
 #endif
 };
 
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(ACT_GRLC)
 enum {
     /* Gralloc perform enums */
     GRALLOC_MODULE_PERFORM_UPDATE_BUFFER_GEOMETRY = 0,
