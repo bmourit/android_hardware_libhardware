@@ -89,6 +89,32 @@ __BEGIN_DECLS
  */
 #define BRIGHTNESS_MODE_SENSOR      1
 
+#ifdef ACT_HARDWARE
+/* ************************************************************************
+* Brightness defination, must be sync with android.os.Power
+*/
+ 
+/**
+* Brightness value for fully off
+*/
+#define BRIGHTNESS_OFF				0
+
+/**
+ * Brightness value for dim backlight
+ */
+#define BRIGHTNESS_DIM 	 			40
+
+/**
+ * Brightness value for fully on
+ */
+#define BRIGHTNESS_ON				255
+
+/**
+ * Brightness value to use when battery is low
+ */
+#define BRIGHTNESS_LOW_BATTERY			10
+#endif
+
 /**
  * The parameters that can be set for a given light.
  *
