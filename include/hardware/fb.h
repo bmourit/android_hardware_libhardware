@@ -28,7 +28,13 @@
 
 __BEGIN_DECLS
 
+#ifdef ACT_AUDIO
+#define MAX_FB_NUM    2
 #define GRALLOC_HARDWARE_FB0 "fb0"
+#define GRALLOC_HARDWARE_FB1 "fb1"
+#else
+#define GRALLOC_HARDWARE_FB0 "fb0"
+#endif
 
 /*****************************************************************************/
 

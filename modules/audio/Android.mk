@@ -22,7 +22,12 @@ LOCAL_PATH := $(call my-dir)
 # required type is 'primary'. Other possibilites are 'a2dp', 'usb', etc.
 include $(CLEAR_VARS)
 
+#ifdef ACT_AUDIO
+#LOCAL_MODULE := audio.primary.default
+LOCAL_MODULE := audio.abandon.default
+#else
 LOCAL_MODULE := audio.primary.default
+#endif
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_SRC_FILES := audio_hw.c
 LOCAL_SHARED_LIBRARIES := liblog libcutils
