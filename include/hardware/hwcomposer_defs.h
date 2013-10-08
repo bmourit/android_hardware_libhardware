@@ -111,7 +111,7 @@ enum {
     HWC_BLENDING_PREMULT  = 0x0105,
 
     /* SRC_ALPHA / ONE_MINUS_SRC_ALPHA */
-    HWC_BLENDING_COVERAGE = 0x0405
+    HWC_BLENDING_COVERAGE = 0x0405,
 
 #ifdef ACT_HARDWARE
     /* DIM. source is forced to a solid color (0,0,0,alpha), and apply
