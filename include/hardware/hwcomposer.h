@@ -622,15 +622,12 @@ typedef struct hwc_composer_device_1 {
 #ifdef ACT_HARDWARE
     int (*fbPrePost)(struct hwc_composer_device_1* dev, buffer_handle_t buffer);
     
-    int (*stretchBlit)(struct hwc_composer_device_1 * dev,	buffer_handle_t Dest,	buffer_handle_t Source,	
-                                                  hwc_rect_t * DestRect,hwc_rect_t * SourceRect,	uint32_t transform);
+    int (*stretchBlit)(struct hwc_composer_device_1 * dev, buffer_handle_t Dest, buffer_handle_t Source, hwc_rect_t * DestRect,hwc_rect_t * SourceRect,	uint32_t transform);
                                                   
     int (*getBackBuffer)(buffer_handle_t * backbuffer);
-    
-    void* reserved_proc[1];
-#else
-    void* reserved_proc[4];
 #endif
+    void* reserved_proc[4];
+
 
 } hwc_composer_device_1_t;
 
