@@ -51,6 +51,14 @@ __BEGIN_DECLS
 #define LIGHT_ID_BLUETOOTH          "bluetooth"
 #define LIGHT_ID_WIFI               "wifi"
 
+/*
+* Additional hardware-specific lights
+*/
+#define LIGHT_ID_CAPS "caps"
+#define LIGHT_ID_FUNC "func"
+#define LIGHT_ID_WIMAX "wimax"
+#define LIGHT_ID_FLASHLIGHT "flashlight"
+
 /* ************************************************************************
  * Flash modes for the flashMode field of light_state_t.
  */
@@ -80,6 +88,31 @@ __BEGIN_DECLS
  * Light brightness is managed by a light sensor.
  */
 #define BRIGHTNESS_MODE_SENSOR      1
+
+#ifdef ACT_HARDWARE
+/* ************************************************************************
+* Brightness defination, must be sync with android.os.Power
+*/
+/**
+* Brightness value for fully off
+*/
+#define BRIGHTNESS_OFF		0
+
+/**
+ * Brightness value for dim backlight
+ */
+#define BRIGHTNESS_DIM		20
+
+/**
+ * Brightness value for fully on
+ */
+#define BRIGHTNESS_ON		255
+
+/**
+ * Brightness value to use when battery is low
+ */
+#define BRIGHTNESS_LOW_BATTERY	10
+#endif
 
 /**
  * The parameters that can be set for a given light.

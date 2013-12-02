@@ -35,17 +35,35 @@ __BEGIN_DECLS
 #define HWC_DEVICE_API_VERSION      HWC_DEVICE_API_VERSION_0_1
 #define HWC_API_VERSION             HWC_DEVICE_API_VERSION
 
+/* Users of this header can define HWC_REMOVE_DEPRECATED_VERSIONS to test that
+ * they still work with just the current version declared, before the
+ * deprecated versions are actually removed.
+ *
+ * To find code that still depends on the old versions, set the #define to 1
+ * here. Code that explicitly sets it to zero (rather than simply not defining
+ * it) will still see the old versions.
+ */
+#if !defined(HWC_REMOVE_DEPRECATED_VERSIONS)
+#define HWC_REMOVE_DEPRECATED_VERSIONS 0
+#endif
+
 /*****************************************************************************/
 
 /**
  * The id of this module
  */
 #define HWC_HARDWARE_MODULE_ID "hwcomposer"
+#ifdef ACT_HARDWARE
+#define HWC_GPU_HARDWARE_MODULE_ID "gpuhwcomposer"
+#endif
 
 /**
  * Name of the sensors device to open
  */
 #define HWC_HARDWARE_COMPOSER   "composer"
+#ifdef ACT_HARDWARE
+#define HWC_GPU_HARDWARE_COMPOSER   "gpucomposer"
+#endif
 
 typedef struct hwc_rect {
     int left;
@@ -154,6 +172,13 @@ typedef struct hwc_layer_1 {
 
             /* blending to apply during composition */
             int32_t blending;
+
+#ifdef ACT_HARDWARE
+            /* for HWC_BLENDING_NONE, alpha is not used.
+             * for HWC_BLENDING_PREMULT and HWC_BLENDING_COVERAGE, it is plane alpha value.
+             * for HWC_BLENDING_DIM, it is the alpha in source color (0,0,0,alpha). */
+            int32_t alpha;
+#endif
 
             /* area of the source to consider, the origin is the top-left corner of
              * the buffer. As of HWC_DEVICE_API_VERSION_1_3, sourceRect uses floats.
@@ -610,7 +635,14 @@ typedef struct hwc_composer_device_1 {
     /*
      * Reserved for future use. Must be NULL.
      */
+#ifdef ACT_HARDWARE
+    int (*fbPrePost)(struct hwc_composer_device_1* dev, buffer_handle_t buffer);
+    int (*stretchBlit)(struct hwc_composer_device_1 * dev, buffer_handle_t Dest, buffer_handle_t Source, hwc_rect_t * DestRect,hwc_rect_t * SourceRect,	uint32_t transform);                                                  
+    int (*getBackBuffer)(buffer_handle_t * backbuffer);
+    void* reserved_proc[1];
+#else
     void* reserved_proc[4];
+#endif
 
 } hwc_composer_device_1_t;
 
@@ -627,6 +659,10 @@ static inline int hwc_close_1(hwc_composer_device_1_t* device) {
 }
 
 /*****************************************************************************/
+
+#if !HWC_REMOVE_DEPRECATED_VERSIONS
+#include <hardware/hwcomposer_v0.h>
+#endif
 
 __END_DECLS
 
