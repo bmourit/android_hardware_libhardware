@@ -79,7 +79,7 @@ enum {
      * by SurfaceFlinger (just as if compositionType was set to HWC_OVERLAY).
      */
     HWC_SKIP_LAYER = 0x00000001,
-    //HWC_SCREENSHOT_ANIMATOR_LAYER = 0x00000002,
+    HWC_SCREENSHOT_ANIMATOR_LAYER = 0x00000002,
 };
 
 /*
@@ -99,6 +99,9 @@ enum {
     /* this layer holds the result of compositing the HWC_FRAMEBUFFER layers.
      * Added in HWC_DEVICE_API_VERSION_1_1. */
     HWC_FRAMEBUFFER_TARGET = 3,
+
+    /* this layer will be handled in the HWC, using a blit engine */
+    HWC_BLIT = 4,
 };
 
 /*

@@ -145,11 +145,13 @@ enum {
 #endif
 };
 
+#ifdef QCOM_HARDWARE
 enum {
     /* Gralloc perform enums */
     GRALLOC_MODULE_PERFORM_UPDATE_BUFFER_GEOMETRY = 0,
     GRALLOC_MODULE_PERFORM_PRIVATE_START
 };
+#endif
 
 /*****************************************************************************/
 
@@ -282,7 +284,7 @@ typedef struct gralloc_module_t {
 typedef struct alloc_device_t {
     struct hw_device_t common;
 
-#ifdef QCOM_BSP
+#ifdef QCOM_HARDWARE
     /*
      * (*allocSize)() Allocates a buffer in graphic memory with the requested
      * bufferSize parameter and returns a buffer_handle_t and the stride in

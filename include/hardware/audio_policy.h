@@ -192,7 +192,6 @@ struct audio_policy {
                                    audio_stream_type_t stream,
                                    int *index);
 
-#ifndef ICS_AUDIO_BLOB
     /* sets the new stream volume at a level corresponding to the supplied
      * index for the specified device.
      * The index is within the range specified by init_stream_volume() */
@@ -206,7 +205,6 @@ struct audio_policy {
                                    audio_stream_type_t stream,
                                    int *index,
                                    audio_devices_t device);
-#endif
 
     /* return the strategy corresponding to a given stream type */
     uint32_t (*get_strategy_for_stream)(const struct audio_policy *pol,
@@ -234,16 +232,13 @@ struct audio_policy {
     bool (*is_stream_active)(const struct audio_policy *pol,
             audio_stream_type_t stream,
             uint32_t in_past_ms);
-#ifndef ICS_AUDIO_BLOB
-#ifndef MR1_AUDIO_BLOB
+
     bool (*is_stream_active_remotely)(const struct audio_policy *pol,
             audio_stream_type_t stream,
             uint32_t in_past_ms);
-#endif
 
     bool (*is_source_active)(const struct audio_policy *pol,
             audio_source_t source);
-#endif
 
     /* dump state */
     int (*dump)(const struct audio_policy *pol, int fd);
