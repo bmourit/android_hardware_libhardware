@@ -63,7 +63,7 @@ struct private_handle_t {
     // add for get phy addr by hw device
     int phys_addr;
     int ion_handle_t;
-	  int     usage;
+	int     usage;
 	ARect 	Crop;  
 
 #ifdef __cplusplus

@@ -122,7 +122,6 @@ enum {
      * (ONE / ONE_MINUS_SRC_ALPHA) blending during composition. */
     HWC_BLENDING_DIM      = 0x0805,
 #endif
-
 };
 
 /*

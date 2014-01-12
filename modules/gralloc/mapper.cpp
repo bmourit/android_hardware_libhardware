@@ -127,13 +127,13 @@ int gralloc_register_buffer(gralloc_module_t const* module,
     // * Specifically, associative virtually-indexed caches are likely to have
     //   problems. Most modern L1 caches fit that description.
 
-    int err = 0;
     private_handle_t* hnd = (private_handle_t*)handle;
-    if (hnd->pid != getpid()) {
-        void *vaddr;
-        err = gralloc_map(module, handle, &vaddr);
-    }
-    return err;
+    ALOGD_IF(hnd->pid == getpid(),
+            "Registering a buffer in the process that created it. "
+            "This may cause memory ordering problems.");
+
+    void *vaddr;
+    return gralloc_map(module, handle, &vaddr);
 }
 
 int gralloc_unregister_buffer(gralloc_module_t const* module,
@@ -142,13 +142,10 @@ int gralloc_unregister_buffer(gralloc_module_t const* module,
     if (private_handle_t::validate(handle) < 0)
         return -EINVAL;
 
-    // never unmap buffers that were created in this process
     private_handle_t* hnd = (private_handle_t*)handle;
-    if (hnd->pid != getpid()) {
-        if (hnd->base) {
-            gralloc_unmap(module, handle);
-        }
-    }
+    if (hnd->base)
+        gralloc_unmap(module, handle);
+
     return 0;
 }
 

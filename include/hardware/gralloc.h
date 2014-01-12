@@ -112,6 +112,9 @@ enum {
      */
     GRALLOC_USAGE_EXTERNAL_DISP         = 0x00002000,
 
+    /* Indicate the buffer will be physical continue, some hw such as vpu need this kind of memory as it does not has mmu */
+    GRALLOC_USAGE_FORCE_CONTIGUOUS = 0x08000000,
+
     /* Must have a hardware-protected path to external display sink for
      * this buffer.  If a hardware-protected path is not available, then
      * either don't composite only this buffer (preferred) to the
@@ -131,27 +134,7 @@ enum {
     GRALLOC_USAGE_PRIVATE_3             = 0x80000000,
     GRALLOC_USAGE_PRIVATE_MASK          = 0xF0000000,
 
-#ifdef EXYNOS4_ENHANCEMENTS
-    /* SAMSUNG */
-    GRALLOC_USAGE_PRIVATE_NONECACHE     = 0x00800000,
-
-    GRALLOC_USAGE_HW_FIMC1              = 0x01000000,
-    GRALLOC_USAGE_HW_ION                = 0x02000000,
-    GRALLOC_USAGE_YUV_ADDR              = 0x04000000,
-    GRALLOC_USAGE_CAMERA                = 0x08000000,
-
-    /* SEC Private usage , for Overlay path at HWC */
-    GRALLOC_USAGE_HWC_HWOVERLAY         = 0x20000000,
-#endif
 };
-
-#ifdef QCOM_HARDWARE
-enum {
-    /* Gralloc perform enums */
-    GRALLOC_MODULE_PERFORM_UPDATE_BUFFER_GEOMETRY = 0,
-    GRALLOC_MODULE_PERFORM_PRIVATE_START
-};
-#endif
 
 /*****************************************************************************/
 

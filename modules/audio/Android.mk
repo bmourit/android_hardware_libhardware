@@ -23,7 +23,6 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 ifeq ($(TARGET_BOARD_PLATFORM),ATM702X)
-#LOCAL_MODULE := audio.primary.default
 LOCAL_MODULE := audio.abandon.default
 else
 LOCAL_MODULE := audio.primary.default
